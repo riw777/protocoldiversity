@@ -44,10 +44,6 @@
 
     <title abbrev="Protocol Diversity">The Internet of Three Protocols: Diversity in Networking Protocols</title>
 
-    <!-- add 'role="editor"' below for the editors if appropriate -->
-
-    <!-- Another author who claims to be an editor -->
-
     <author fullname="Jared Mauch" initials="J.M." role="editor"
             surname="Mauch">
       <organization>Netflix</organization>
@@ -78,13 +74,8 @@
 
     <workgroup>Internet Engineering Task Force</workgroup>
 
-    <!-- WG name at the upperleft corner of the doc,
-         IETF is fine for individual submissions.  
-	 If this element is not present, the default is "Network Working Group",
-         which is used by the RFC Editor as a nod to the history of the IETF. -->
-
     <abstract>
-      <t>The Internet began with a clear 'waist' at layer 3 in the form of the Internet Protocol. Above IP there was a suite of protocols, each of which was designed to carry a different kind of information. Below IP were a wide range of physical transport protocols such as Ethernet, Token Ring, and SONET. In recent years, however, the diversity of the protocol stack has been dramatically reduced, especially above IP. While protocols still exist for transporting various kinds of information, in practice only three are widely used: the Border Gateway Protocol (BGP), the HyperText Transfer Protocol (HTTP), and the Domain Name System (DNS). These protocols, and their attendent systems, have been expanded to take on virtually every role in the networking space.</t>
+      <t>The Internet began with a clear 'waist' at layer 3 in the form of the Internet Protocol. Above IP there was a suite of protocols, each of which was designed to carry a different kind of information. Below IP was a wide range of physical transport protocols such as Ethernet, Token Ring, and SONET. In recent years, however, the diversity of the protocol stack has been dramatically reduced, especially above IP. While protocols still exist for transporting various kinds of information, in practice only three are widely used: the Border Gateway Protocol (BGP), the HyperText Transfer Protocol (HTTP), and the Domain Name System (DNS). These protocols, and their attendent systems, have been expanded to take on virtually every role in the networking space.</t>
 
       <t>This draft examines the phenomena and consequences of the dwindling diversity in internet protocols.</t>
     </abstract>
@@ -126,12 +117,23 @@
 
     <section anchor="COMPLEXITY" title="Complexity and Lack of Protocol Diversity">
 
+	    <t>The increasing complexity of networks is widely recognized. Some of this complexity is driven by the ever-increasing requirements placed on networks. Poor design also drives complexity in modern networks. One example is the increasing belief that reducing the number of protocols necessarily decreases network complexity, making a network easier to design, operate, and manage. The "single protocol network" is an important factor in the increasing use of BGP as an interior gateway protocol.</t>
+	    
+	    <t>Moving towards a single protocol to solve "all problems," however, ignores a basic tenent of complexity: local and global optimization are often orthogonal. Decreasing complexity in one area of a network inevitably increases complexity in some other area, even if the operator is not immediately aware of the suboptimal results on the system as a whole.</t>
+	
+      <t>One example of this tradeoff is the increasing use of BGP as an IGP. In its original, interdomain, role, the operator is required to configure BGP peering sessions rather than relying on an automated discovery process. The intentional configuration of peering between networks in different administrative domains provides a layer of protection against accidental peering, and a layer of security (peers cannot be formed without both sides taking intentional action). To use BGP as an IGP, however, some form of peer autodiscovery must be added to the protocol--adding lines of code, new configuration knobs, and increasing the complexity of the peering state machine.</t>
+
+      <t>Any single piece of complexity might seem trivial in the abstract, but the continuing addition of new features to a protocol can increase complexity to the point that its difficult for an operator to know what to expect when the protocol is deployed in the field unless they have deep expertise in every options each implementation offers. Further, eatch new feature represents new lines of code and paths through the code that each developer must understand and work around. The sheer number of lines of code in an implementation of BGP has grown from tens of thousands to hundreds of thousands within the last few years.</t>
+
+      <t>While operating a network with more than one routing protocol may be more complex (in some sense) than operating a network using a single control plane, the complexity is transferred to a higher level of expertise on the part of the operator, a higher level of expertise in the protocol developer, and a more complex implementation code base. In essence, the operator is outsourcing complexity into the protocol. This is hardly a sustainable model.</t>
 
     </section> <!-- end of complexity -->
 
-
-
     <section anchor="OPHARMS" title="Operational Harms of Lack of Protocol Diversity">
+
+      <t>
+
+
       <t>The use of a few protocols to carry "everything" impacts operator's ability to correctly monitor and manage different traffic types. For instance, because video, files, hypertext, voice, and--more recently--DNS queries are all carried in the HTTPS protocol, there is no differentiation, from an operator's perspective, between these different kinds of traffic. This lack of differentiation makes it impossible for operators to accurately measure and 
 
 
