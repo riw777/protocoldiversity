@@ -131,19 +131,53 @@
 
     <section anchor="OPHARMS" title="Operational Harms of Lack of Protocol Diversity">
 
-      <t>
+      <t>Two broad forms of harm from a lack of protocol diversity: those related to observabliity, and those related to the correct operation of a network.</t>
+
+      <section anchor="OBSHARMS" title="Lack of Protocol Diversity and Observation">
+
+        <t>The use of a few protocols to carry "everything" impacts operator's ability to correctly monitor and manage different traffic types. For instance, because video, files, hypertext, voice, and--more recently--DNS queries are all carried in the HTTPS protocol, there is no differentiation, from an operator's perspective, between these different kinds of traffic. This lack of differentiation makes it impossible for operators to accurately measure and understand the traffic flowing through their network.</t>
+
+      </section> <!-- end of observational harms -->
+
+      <section anchor="OBSHARMS" title="Lack of Protocol Diversity and Correct Operation">
+
+      <t>While most operators are familiar with the Mean Time Between Failures (MTBF), a measure of operational harm that is more approriate for measuring network outages is the Mean Time Between Mistakes (MTBM). Research has shown that operator mistakes are the primary cause of large-scale network outages in the real world (need a reference here). Each new feature added to a protocol represents a new opportunity for mistakes. Features orthogonal to the original intent and scope of the protocol represent greater opportunities for catastrophinc mistakes.</t>
+
+      <t>The BGP peering process considered in a prior section provides several good examples. When used as an Exterior Gateway Protocol (EGP), BGP should not automatically discover speakers reachable through connected interfaces, nor should it advertise routes unless some policy is configured. These two defaults protect an operator from accidentally connecting to a network in another administrative domain, peering, and accepting or advertising routes representing a breach of security, risking a routing loop, or otherwise causing a problem.</t>
+
+      <t>The defaults for a BGP implementation designed or deployed as an IGP, however, should be precisely the opposite in these two cases. BGP speakers should auto-discover potential peering speakers, and should advertise all routes with no configuration. Deploying a set of configurations designed for use with BGP as an IGP in an external peering situation can cause network outages.</t>
+
+      <t>Of course, network operators should be aware of these kinds of problems, and configure their BGP speakers defensively--but this makes the job of the operator more complex, and makes it possible to cause catastrophic failures with simple configuration options. The solution is always "be careful," but humans make mistakes.</t>
+
+      <!-- probably need an example from DNS here -->
 
 
-      <t>The use of a few protocols to carry "everything" impacts operator's ability to correctly monitor and manage different traffic types. For instance, because video, files, hypertext, voice, and--more recently--DNS queries are all carried in the HTTPS protocol, there is no differentiation, from an operator's perspective, between these different kinds of traffic. This lack of differentiation makes it impossible for operators to accurately measure and 
-
+      </section> <!-- end of correct operation -->
 
     </section> <!-- end of operational harms -->
 
 
 
-    <section anchor="CENTRALIZATION" title="Proptocol Diversity and Centralization">
+    <section anchor="CENTRALIZATION" title="Protocol Diversity and Centralization">
+
+      <t>As a protocol becomes more complex, the body of operational and development knowledge around that protocol is fragmented, with each fragment being thinner. This fragmentation and thinning encourages the centratlization of expertise, operations, and ultimately encourages the centralization of the global Internet. For instance, in the case of BGP being used both as an IGP and an EGP, the number of engineers capable of understanding both use cases equally well is likely to be vanishingly small. Engineers and developers will necessarily specialize in one use case or the other. Each of these use cases will, over time, become increasingly complex.</t>
+
+      <t>As the number of engineers and developers who understand the "whole protocol," or even understand any single use case in great depth, falls, they will tend to gravitate to larger operators. Larger operators will also have a better platform on which to teach engineers and developers the "whole protocol" and each narrow use case. This concentration of qualified personnel will, in turn, tend to centralize the development and operation of large-scale services.</t>
 
     </section> <!-- end of centralization -->
+
+    <section anchor="RECOMMENDATIONS" title="Recommendations">
+
+      <t>Encourage declaring the purpose or scope of a protocol when it's being designed</t>
+      <t>The IESG, IAB, WG chairs, etc., should seriously question the extension of a protocol beyond this scope</t>
+      <t>Encourage the creation of new protocols to solve new problems, rather than constantly adding to existing protocols</t>
+
+
+    </section> <!-- end of recommendations -->
+
+
+<!-- working here -->
+
 
 
     <section anchor="Acknowledgements" title="Acknowledgements">
