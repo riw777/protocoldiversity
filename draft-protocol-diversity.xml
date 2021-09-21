@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This template is for creating an Internet Draft using xml2rfc,
+     which is available here: http://xml2rfc.tools.ietf.org. -->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC2119 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2629 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
+<!ENTITY RFC3552 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3552.xml">
+<!ENTITY I-D.narten-iana-considerations-rfc2434bis SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.narten-iana-considerations-rfc2434bis.xml">
+]>
+
+
+
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc strict="yes" ?>
+<!-- give errors regarding ID-nits and DTD validation -->
+<!-- control the table of contents (ToC) -->
+<?rfc toc="yes"?>
+<!-- generate a ToC -->
+<?rfc tocdepth="4"?>
+<!-- the number of levels of subsections in ToC. default: 3 -->
+<!-- control references -->
+<?rfc symrefs="yes"?>
+<!-- use symbolic references tags, i.e, [RFC2119] instead of [1] -->
+<?rfc sortrefs="yes" ?>
+<!-- sort the reference entries alphabetically -->
+<!-- control vertical white space 
+     (using these PIs as follows is recommended by the RFC Editor) -->
+<?rfc compact="yes" ?>
+<!-- do not start each main section on a new page -->
+<?rfc subcompact="no" ?>
+<!-- keep one blank line between list items -->
+<!-- end of list of popular I-D processing instructions -->
+<rfc category="info" docName="draft-ietf-xml2rfc-template-05" ipr="full3978">
+  <!-- category values: std, bcp, info, exp, and historic
+     ipr values: full3667, noModification3667, noDerivatives3667
+     you can add the attributes updates="NNNN" and obsoletes="NNNN" 
+     they will automatically be output with "(if approved)" -->
+
+  <!-- ***** FRONT MATTER ***** -->
+
+  <front>
+    <!-- The abbreviated title is used in the page header - it is only necessary if the 
+         full title is longer than 39 characters -->
+
+    <title abbrev="Protocol Diversity">The Internet of Three Protocols: Diversity in Networking Protocols</title>
+
+    <!-- add 'role="editor"' below for the editors if appropriate -->
+
+    <!-- Another author who claims to be an editor -->
+
+    <author fullname="Jared Mauch" initials="J.M." role="editor"
+            surname="Mauch">
+      <organization>Netflix</organization>
+
+      <address>
+        <postal />
+        <phone />
+        <email>jared@puck.nether.net</email>
+      </address>
+    </author>
+
+    <author fullname="Russ White" initials="R.W." role="editor"
+            surname="White">
+      <organization>Juniper Networks</organization>
+
+      <address>
+        <postal />
+        <phone />
+        <email>russ@riw.us</email>
+      </address>
+    </author>
+
+    <date year="2021" />
+
+    <!-- Meta-data Declarations -->
+
+    <area>Not Certain</area>
+
+    <workgroup>Internet Engineering Task Force</workgroup>
+
+    <!-- WG name at the upperleft corner of the doc,
+         IETF is fine for individual submissions.  
+	 If this element is not present, the default is "Network Working Group",
+         which is used by the RFC Editor as a nod to the history of the IETF. -->
+
+    <abstract>
+      <t>The Internet began with a clear 'waist' at layer 3 in the form of the Internet Protocol. Above IP there was a suite of protocols, each of which was designed to carry a different kind of information. Below IP were a wide range of physical transport protocols such as Ethernet, Token Ring, and SONET. In recent years, however, the diversity of the protocol stack has been dramatically reduced, especially above IP. While protocols still exist for transporting various kinds of information, in practice only three are widely used: the Border Gateway Protocol (BGP), the HyperText Transfer Protocol (HTTP), and the Domain Name System (DNS). These protocols, and their attendent systems, have been expanded to take on virtually every role in the networking space.</t>
+
+      <t>This draft examines the phenomena and consequences of the dwindling diversity in internet protocols.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>Sample Reference <xref target="RFC2629">RFC&nbsp;2629</xref>.</t>
+
+      <t>Protocols were once designed to serve a narrow range of well-defined purposes, such as setting up a voice session, moving voice traffic, moving a file between systems, computing interdomain loop-free paths, etc. Recently, however, the IETF has been adding new functionality to existing protocols rather than creating new ones in response to increasing use cases and user requirements. Over time, the "interesting" protocol space has narrowed from hundreds to tens, and now to less-than-ten.</t>
+
+      <t>Three protocols, and their attendent systems, now dominate the Internet ecosystem: BGP, HTTP, and DNS. Each of these three protocols have been expanded to support an ever-increasing array of use cases.</t>
+
+      <t>This document begins by considering the increasing reliance on these three protocols to solve a wide array or use cases. Examples will be given of each protocol assuming more capabilities that would have traditionally been provided by creating a new protocol. The second section of this document considers the harms resulting from this lack of protocol diversity, including the impact on network operations, complexity, and the possible support this lack of diversity gives to the centralization of  Internet infrastructure and services.</t>
+
+    <section title="Requirements Language">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119">RFC 2119</xref>.</t>
+      </section> <!-- end of requirements language -->
+    </section> <!-- end of introduction -->
+
+
+<!-- WORKING HERE -->
+
+    <section anchor="EXAMPLES" title="Examples of Protocol Concentration">
+      <t>The HyperText Transfer Protocol (HTTP) was originally designed to transfer text (as its name implies) formatted in the HyperText Markup Language (HTML). When HTTP was designed, separate protocols were available for file transfer (FTP), voice (RTP), and encrypted transport (TLS and IPsec). Over time, HTTP has been extended to transport virtually every kind of media, minimizing (or even eliminating) the usage of specialized content protocols. The HTTPS extensions eliminate the use of specialized secure transports.</t>
+
+      <t>More recently, HTTPS has been extended to carry DNS as well as content, moving the transport of naming information from TCP and UDP into the HTTP transport. This change also moves the primary responsibility for name resolution from the operating system into the web browser. Thus, a modern end-host can be completely contained within a web browser, reducing the diversity of applications and functionality on an end point.</t>
+
+      <t>The Border Gateway Protocol was originally designed to provide interdomain routing information. To this end, the protocol was designed with transit operations in mind, including policy instruments (such as local preference, multiple exit discriminator, etc.). The first set of extensions added to BGP were for building and supporting overlays, such as MPLS and eVPN; while these do increase the complexity of the protocol, they appear to be closely related to the original purpose of the protocol.</t>
+      
+      <t>Another recent development, however, is the use of BGP to replace Interior Gateway Protocols (IGPs), such as OSPF and IS-IS, in campus and data center fabric protocols. These extensions lie outside the original purpose of BGP.</t>
+
+      <t>The Domain Name System (DNS) was originally designed to translate hostnames to IP addresses via a protocol and a distributed database system. New functionality is constantly added to the DNS, including ... </t>
+
+
+
+
+    </section> <!-- end of examples -->
+
+    <section anchor="COMPLEXITY" title="Complexity and Lack of Protocol Diversity">
+
+
+    </section> <!-- end of complexity -->
+
+
+
+    <section anchor="OPHARMS" title="Operational Harms of Lack of Protocol Diversity">
+      <t>The use of a few protocols to carry "everything" impacts operator's ability to correctly monitor and manage different traffic types. For instance, because video, files, hypertext, voice, and--more recently--DNS queries are all carried in the HTTPS protocol, there is no differentiation, from an operator's perspective, between these different kinds of traffic. This lack of differentiation makes it impossible for operators to accurately measure and 
+
+
+    </section> <!-- end of operational harms -->
+
+
+
+    <section anchor="CENTRALIZATION" title="Proptocol Diversity and Centralization">
+
+    </section> <!-- end of centralization -->
+
+
+    <section anchor="Acknowledgements" title="Acknowledgements">
+      <t>This template was derived from an initial version written by Pekka
+      Savola and contributed by him to the xml2rfc project.</t>
+
+      <t>This document is part of a plan to make xml2rfc indispensable <xref target="DOMINATION"></xref>.</t>
+    </section> <!-- end of acknowledgements -->
+
+    <!-- Possibly a 'Contributors' section ... -->
+
+    <section anchor="IANA" title="IANA Considerations">
+      <t>This memo includes no request to IANA.</t>
+
+      <t>All drafts are required to have an IANA considerations section (see
+      <xref target="I-D.narten-iana-considerations-rfc2434bis">the update of
+      RFC 2434</xref> for a guide). If the draft does not require IANA to do
+      anything, the section contains an explicit statement that this is the
+      case (as above). If there are no requirements for IANA, the section will
+      be removed during conversion into an RFC by the RFC Editor.</t>
+    </section> <!-- end of IANA considerations -->
+
+    <section anchor="Security" title="Security Considerations">
+      <t>All drafts are required to have a security considerations section.
+      See <xref target="RFC3552">RFC 3552</xref> for a guide.</t>
+    </section> <!-- end of security considerations -->
+  </middle>
+
+  <!--  *****BACK MATTER ***** -->
+
+  <back>
+    <!-- References split into informative and normative -->
+
+    <!-- There are 2 ways to insert reference entries from the citation libraries:
+     1. define an ENTITY at the top, and use "ampersand character"RFC2629; here (as shown)
+     2. simply use a PI "less than character"?rfc include="reference.RFC.2119.xml"?> here
+        (for I-Ds: include="reference.I-D.narten-iana-considerations-rfc2434bis.xml")
+
+     Both are cited textually in the same manner: by using xref elements.
+     If you use the PI option, xml2rfc will, by default, try to find included files in the same
+     directory as the including file. You can also define the XML_LIBRARY environment variable
+     with a value containing a set of directories to search.  These can be either in the local
+     filing system or remote ones accessed by http (http://domain/dir/... ).-->
+
+    <references title="Normative References">
+      <!--?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
+      &RFC2119;
+
+      <reference anchor="min_ref">
+        <!-- the following is the minimum to make xml2rfc happy -->
+
+        <front>
+          <title>Minimal Reference</title>
+
+          <author initials="authInitials" surname="authSurName">
+            <organization></organization>
+          </author>
+
+          <date year="2006" />
+        </front>
+      </reference>
+    </references>
+
+    <references title="Informative References">
+      <!-- Here we use entities that we defined at the beginning. -->
+
+      &RFC2629;
+
+      &RFC3552;
+
+      &I-D.narten-iana-considerations-rfc2434bis;
+
+      <!-- A reference written by by an organization not a person. -->
+
+      <reference anchor="DOMINATION"
+                 target="http://www.example.com/dominator.html">
+        <front>
+          <title>Ultimate Plan for Taking Over the World</title>
+
+          <author>
+            <organization>Mad Dominators, Inc.</organization>
+          </author>
+
+          <date year="1984" />
+        </front>
+      </reference>
+    </references>
+
+    <section anchor="app-additional" title="Additional Stuff">
+      <t>This becomes an Appendix.</t>
+    </section>
+
+    <!-- Change Log
+
+v00 2006-03-15  EBD   Initial version
+
+v01 2006-04-03  EBD   Moved PI location back to position 1 -
+                      v3.1 of XMLmind is better with them at this location.
+v02 2007-03-07  AH    removed extraneous nested_list attribute,
+                      other minor corrections
+v03 2007-03-09  EBD   Added comments on null IANA sections and fixed heading capitalization.
+                      Modified comments around figure to reflect non-implementation of
+                      figure indent control.  Put in reference using anchor="DOMINATION".
+                      Fixed up the date specification comments to reflect current truth.
+v04 2007-03-09 AH     Major changes: shortened discussion of PIs,
+                      added discussion of rfc include.
+v05 2007-03-10 EBD    Added preamble to C program example to tell about ABNF and alternative 
+                      images. Removed meta-characters from comments (causes problems).  -->
+  </back>
+</rfc>
